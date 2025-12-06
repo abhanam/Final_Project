@@ -1,6 +1,7 @@
-report.html: report.rmd code/render_report.R output/clean_data.rds \
-  output/table_one.rds output/boxplot.png 
-	Rscript code/render_report.R
+# report associated rules
+report.html: report.Rmd code/render_report.R output/clean_data.rds \
+	output/table_one.rds output/boxplot.png 
+		Rscript code/render_report.R
 
 output/clean_data.rds: code/00_clean_data.R raw_data/heart.csv
 	Rscript code/00_clean_data.R
@@ -18,3 +19,14 @@ install:
 .PHONY: clean
 clean: 
 	rm -f output/*.rds
+
+# Docker Rules
+
+# Docker image name
+IMAGE_NAME = abhanam/finalproject-report
+
+# Generate report using Docker (assignment requirement - NO prerequisites)
+report:
+	docker run --rm -v /"$$(pwd)"/report:/report $(IMAGE_NAME)
+
+.PHONY: report

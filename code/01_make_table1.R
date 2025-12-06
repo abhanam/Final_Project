@@ -6,7 +6,6 @@ data <- readRDS(
 
 library(gtsummary)
 
-
 table_one <- data |>
   select("Sex", "Age", "ChestPainType", "RestingBP", "Cholesterol", "MaxHR",
          "ExerciseAngina", "ST_Slope", "HeartDisease") |>
@@ -19,3 +18,4 @@ saveRDS(
   table_one,
   file = here::here("output/table_one.rds")
 )
+

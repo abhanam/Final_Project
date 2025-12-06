@@ -57,3 +57,45 @@ After cloning the repository, run the following command:
  `make install`
 
 This will automatically restore all required R packages using the `renv.lock` file
+
+
+# Docker Setup
+
+Docker is set up for this project so the report can run in a containerized environment.
+
+## Building the Docker Image
+
+To build the image locally, run:
+
+```bash
+docker build -t abhanam/finalproject-report .
+```
+
+## DockerHub
+
+The image is uploaded to DockerHub here:
+
+**https://hub.docker.com/r/abhanam/finalproject-report**
+
+You can pull it with:
+```bash
+docker pull abhanam/finalproject-report:latest
+```
+
+## Running the Report with Docker
+
+To generate the report using Docker, just run:
+```bash
+make report
+```
+
+This will pull the image from DockerHub, run the container, and create the report in the `report/` folder.
+
+**Note:** This Makefile works on Windows (Git Bash), Mac, and Linux. The path formatting handles Windows-specific requirements while remaining compatible with Unix-based systems.
+
+## Running Docker Manually
+
+If you don't want to use Make, you can also run:
+```bash
+docker run --rm -v /"$(pwd)"/report:/report abhanam/finalproject-report
+```
